@@ -11,6 +11,12 @@ channel.on('join', function (id, client) {
 	}
 	this.on('broadcast', this.subscriptions[id]);
 });
+
+channel.on('leave', function (id) {
+	channel.removeListener(
+		'broadcast', this.subscriptions[id]);
+	channel.emit('broadcast', id, id + " has left the chat.\n");
+});
 var server = net.createServer(function (client) {
 		var id = client.remoteAddress + ':' + client.remotePort;
 		client.on('connect', function () {
@@ -19,6 +25,9 @@ var server = net.createServer(function (client) {
 		client.on('data', function (data) {
 			data = data.toString();
 			channel.emit('broadcast', id, data);
+		});
+		client.on('close', function () {
+			channel.emit('leave', id);
 		});
 	});
 server.listen(8888);
