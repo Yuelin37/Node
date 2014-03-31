@@ -5,11 +5,13 @@
 	</script>
 	<script type="text/javascript">
 	var socket = io.connect();
-	socket.on('message', function (time) {
-		document.getElementById('time').innerHTML = time;
+	socket.on('message', function (data) {
+		document.getElementById('time').innerHTML += data + '\n';
+		var textarea = document.getElementById('time');
+		textarea.scrollTop = textarea.scrollHeight;
 	});
 	</script>
 </head>
-<body>Current server time is: <b><span id="time"></span></b>
+<body><textarea id="time", rows=20, style="width:100%;"></textarea>
 </body>
 </html>

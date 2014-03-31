@@ -15,12 +15,13 @@ function startWatch() {
 	var curLen = 0;
 	fs.watchFile('./my.txt', function(curr, prev) {
 		if (curr.mtime.getTime() !== prev.mtime.getTime()) {
+			var now = new Date().toUTCString();
 			console.log('"my.txt" has been modified');
 			fs.readFile('./my.txt', "utf-8", function(er, data) {
 				curLen = data.length;
-				console.log("pre: %s; cur: %s\n", curLen, preLen);
+				// console.log("pre: %s; cur: %s\n", curLen, preLen);
 				if (preLen < curLen) {
-					data = data.substring(preLen, curLen);
+					data =  '[' + now +']: ' + data.substring(preLen+1, curLen);
 					io.sockets.send(data);
 				}
 				console.log(data);
