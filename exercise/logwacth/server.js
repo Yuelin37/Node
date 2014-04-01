@@ -21,7 +21,7 @@ function startWatch() {
 				curLen = data.length;
 				// console.log("pre: %s; cur: %s\n", curLen, preLen);
 				if (preLen < curLen) {
-					data =  '[' + now +']: ' + data.substring(preLen+1, curLen);
+					data = '[' + now + ']: ' + data.substring(preLen, curLen);
 					io.sockets.send(data);
 				}
 				console.log(data);
@@ -30,9 +30,9 @@ function startWatch() {
 		}
 	});
 
-	
+
 }
 startWatch();
-app.listen(3000);
-
-
+app.listen(3000, function() {
+	console.log('Express server listening on port 3000');
+});
