@@ -8,10 +8,13 @@ photos1.push({
 	path: 'http://nodejs.org/images/ryan-speaker.jpg'
 });
 
-exports.list = function(req, res) {
-	res.render('photos', {
-		title: 'My Photos',
-		photos2: photos1
+exports.list = function(req, res, next) {
+	Photo.find({}, function(err, photos) {
+		if (err) return next(err);
+		res.render('photos', {
+			title: 'Photos',
+			photos: photos
+		});
 	});
 };
 
@@ -25,19 +28,19 @@ var Photo = require('../models/Photo');
 var path = require('path');
 var fs = require('fs');
 var join = path.join;
-var util = require('util');
+
 exports.submit = function(dir) {
 	return function(req, res, next) {
 		var img = req.files.photo.image;
 		var name = req.body.photo.name || img.name;
 		var path = join(dir, img.name);
 
-		var readStream = fs.createReadStream(img.path)
-		var writeStream = fs.createWriteStream(path);
+		var is = fs.createReadStream(img.path);
+		var os = fs.createWriteStream(path);
 
-		util.pump(readStream, writeStream, function() {
-			fs.unlinkSync(img);
-
+		is.pipe(os);
+		is.on('end', function() {
+			fs.unlinkSync(img.path);
 			Photo.create({
 				name: name,
 				path: img.name
@@ -47,6 +50,16 @@ exports.submit = function(dir) {
 			});
 		});
 
+	};
+};
 
+exports.download = function(dir) {
+	return function(req, res, next) {
+		var id = req.params.id;
+		Photo.findById(id, function(err, photo) {
+			if (err) return next(err);
+			var path = join(dir, photo.path);
+			res.download(path);
+		});
 	};
 };
