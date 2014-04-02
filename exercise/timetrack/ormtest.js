@@ -4,13 +4,9 @@ orm.connect("mysql://root:root@localhost/timetrack", function(err, db) {
     if (err) throw err;
 
     var Person = db.define("person", {
-        name: String,
-        surname: String,
-        age: Number,
-        male: Boolean,
-        continent: ["Europe", "America", "Asia", "Africa", "Australia", "Antartica"], // ENUM type
-        photo: Buffer, // BLOB/BINARY
-        data: Object // JSON encoded
+        name: { type: 'text', required: true },
+        surname: { type: 'text', required: true },
+        age: { type: 'number', required: false }
     }, {
         methods: {
             fullName: function() {
@@ -21,7 +17,17 @@ orm.connect("mysql://root:root@localhost/timetrack", function(err, db) {
             age: orm.enforce.ranges.number(18, undefined, "under-age")
         }
     });
+    db.sync(function (err) {
+      if (err) throw err;
+      Person.create({
+        name: "A", surname: "Doe", age: 38
+    }, function (err, message) {
+        if (err) throw err;
 
+        db.close()
+        console.log("Done!");
+    });
+  });
     Person.find({
         surname: "Doe"
     }, function(err, people) {
