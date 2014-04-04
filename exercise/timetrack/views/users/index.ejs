@@ -11,9 +11,15 @@
 		<% users.forEach(function(user) { %>
 		<div class="users">
 			<h2><%=user.fullName()%></h2>
-			
 		</div>
 		<% }) %>
 	</div>
+	<select id="user">
+		<% users.forEach(function(user) { %>
+		<option value = "<%=user.fullName()%>"><%=user.fullName()%></option>
+		<% }) %>
+
+	</select>
 </body>
 </html>
+

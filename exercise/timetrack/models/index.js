@@ -6,7 +6,8 @@ var connection = null;
 
 function setup(db, cb) {
   require('./user')(orm, db);
-  // require('./comment')(orm, db);
+  require('./hour')(orm, db);
+  require('./item')(orm, db);
 
   return cb(null, db);
 }
