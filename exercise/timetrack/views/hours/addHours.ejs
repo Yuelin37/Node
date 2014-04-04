@@ -1,0 +1,23 @@
+<!DOCTYPE html/>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1>Log Hours</h1>
+	<form action="/hour/add" enctype="multipart/form-data" method="post">
+		
+
+	<label>Item: </label>
+	<select name="item">
+		<% items.forEach(function(item) { %>
+		<option value = "<%=item.id%>"><%=item.name%></option>
+		<% }) %>
+	</select>
+	<label>Hour(s): </label>
+	<input type="text" name="numOfHour">
+	<input type="submit" value="Add">
+</form>
+</body>
+</html>
