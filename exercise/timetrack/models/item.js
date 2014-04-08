@@ -1,6 +1,6 @@
 module.exports = function (orm, db) {
   var Item = db.define("item", {
-        name: { type: 'text', required: true }
+        itemname: { type: 'text', required: true }
     }, {
         methods: {
             // fullName: function() {

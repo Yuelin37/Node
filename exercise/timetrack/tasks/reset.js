@@ -10,7 +10,7 @@ models(function (err, db) {
       if (err) throw err;
 
       db.models.item.create({
-        name: "Programming"
+        itemname: "Programming"
       }, function (err, message) {
         if (err) throw err;
 
