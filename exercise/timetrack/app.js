@@ -40,7 +40,6 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/add', user.add);
 app.post('/add', user.addPost);
