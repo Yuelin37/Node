@@ -5,16 +5,25 @@
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-	<h1>Users</h1>
+	<h1>Hours</h1>
 	<p>User List</p>
-	<div id="housr">
+	<div id="hours">
 		<% hours.forEach(function(hour) { %>
-		<div class="users">
-			<h2><%=hour.num%></h2>
+		<div class="hours">
+			<h2><%=hour.loggedFor%></h2><h2><%=hour.num%></h2>
+			<% items.forEach(function(item) { if (item.id == hour.item_id) {%>
+			<h2><%=item.itemname%></h2>
+			<% }}) %>
 		</div>
 		<% }) %>
 	</div>
-
+	<div id="items">
+		<% items.forEach(function(item) { %>
+		<div class="hours">
+			<%=item.itemname%>
+		</div>
+		<% }) %>
+	</div>
 </body>
 </html>
 

@@ -6,20 +6,28 @@
 var formidable = require('formidable');
 
 exports.list = function(req, res) {
-	req.models.hour.find({
-		// surname: "Doe"
-	}, function(err, hours) {
 
-		res.render('hours', {
-			title: 'Hours',
-			hours: hours
+	req.models.item.find({}, function(err, items) {
+
+
+		req.models.hour.find({
+			// surname: "Doe"
+		}, function(err, hours) {
+			console.log(items);
+
+			res.render('hours', {
+				title: 'Hours',
+				hours: hours,
+				items: items
+			});
 		});
 	});
+
 };
 
 
 exports.addGet = function(req, res) {
-	
+
 	req.models.item.find({
 		//
 	}, function(err, items) {
@@ -40,6 +48,7 @@ exports.addPost = function(req, res) {
 
 		req.models.hour.create({
 			num: fields.numOfHour,
+			loggedFor: fields.logForDate,
 			item_id: fields.item
 		}, function(err, people) {
 			if (err) throw err;

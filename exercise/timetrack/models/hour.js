@@ -1,6 +1,14 @@
-module.exports = function (orm, db) {
-  var Hour = db.define("hour", {
-        num: { type: 'number', required: true }
+module.exports = function(orm, db) {
+    var Hour = db.define("hour", {
+        num: {
+            type: 'number',
+            required: true
+        },
+        loggedFor: {
+            type: 'date',
+            required: true,
+            time: true
+        }
     }, {
         methods: {
             // fullName: function() {
@@ -11,5 +19,9 @@ module.exports = function (orm, db) {
             num: orm.enforce.ranges.number(0, undefined, "Must be greater than 0.")
         }
     });
-  Hour.hasOne('item', db.models.item, { required: true, reverse: 'hours', autoFetch: true });
+    Hour.hasOne('item', db.models.item, {
+        required: true,
+        reverse: 'hours',
+        autoFetch: true
+    });
 };

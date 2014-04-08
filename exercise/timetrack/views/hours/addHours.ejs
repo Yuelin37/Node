@@ -12,11 +12,13 @@
 	<label>Item: </label>
 	<select name="item">
 		<% items.forEach(function(item) { %>
-		<option value = "<%=item.id%>"><%=item.name%></option>
+		<option value = "<%=item.id%>"><%=item.itemname%></option>
 		<% }) %>
 	</select>
 	<label>Hour(s): </label>
 	<input type="text" name="numOfHour">
+	<label>Date: </label>
+	<input type="text" name="logForDate">
 	<input type="submit" value="Add">
 </form>
 </body>
