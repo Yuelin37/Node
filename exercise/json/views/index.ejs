@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script type="text/javascript" src="/javascripts/googlechart.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+
+    <script type="text/javascript"> 
+    var mydata = <%- JSON.stringify(title) %>
+    var parsed = JSON.parse(mydata);
+    var jsn = eval( "(" + mydata + ")");
+    
+    console.log(jsn);
+    var myarray = [['Item', 'Hours']];
+    for(var o in jsn){  
+      var tmp = [o, jsn[o]];
+      myarray.push(tmp);  
+    }
+      console.log(myarray);  
+
+    var myitemarray = [];
+    var myhourarray = [];
+    for(var o in jsn){  
+          var tmp = o;
+          myitemarray.push(tmp);
+          var myhour = jsn[o];
+          myhourarray.push(myhour);
+        }
+        console.log(myitemarray);
+        console.log(myhourarray);
+
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'hours'
+            },
+            subtitle: {
+                text: 'Source: Yuelin.com'
+            },
+            xAxis: {
+                categories: myitemarray
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Hours'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} hours</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Efforts',
+                data: myhourarray
+    
+            }]
+        });
+    });
+    
+
+    </script>
+  </head>
+  <body>
+    <script src="/javascripts/highcharts.js"></script>
+<script src="/javascripts/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; ma
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div id="chart_div"></div>
+  </body>
+</html>
