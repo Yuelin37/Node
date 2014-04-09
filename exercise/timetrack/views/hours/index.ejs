@@ -3,14 +3,63 @@
 <head>
 	<title><%= title %></title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+      	var hoursInfo = [['ID', 'Hours']];
+        var mydata = [
+		 	['Sales', 'Expenses'],
+		 	[ 1, 400],
+		 	[ 2, 160],		 	
+		 	[ 3, 460]		 	
+		 ];
+      	
+		for(var <%i = 0%>; i < <%=hours.length%>; <%i++%>) {
+			var hourItem =  [<%=hours[0].item_id.toString()%>, <%=hours[0].num.toString()%>];
+			
+			hoursInfo.push(hourItem);
+
+		}
+
+		
+
+		    
+
+
+
+
+
+		
+		 
+        var data = google.visualization.arrayToDataTable(hoursInfo);
+        var data1 = google.visualization.arrayToDataTable(mydata);
+        var options = {
+          title: 'Company Performance'
+        };
+
+        
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+        var chart1 = new google.visualization.LineChart(document.getElementById('chart_div1'));
+        chart1.draw(data1, options);
+      }
+    </script>
+
 </head>
 <body>
 	<h1>Hours</h1>
 	<p>User List</p>
+
 	<div id="hours">
 		<% hours.forEach(function(hour) { %>
 		<div class="hours">
-			<h2><%=hour.loggedFor%></h2><h2><%=hour.num%></h2>
+			<h2><%=hour.loggedFor%></h2><h2><%=hour.num%></h2><%=hour.item_id%></h2>
+
 			<% items.forEach(function(item) { if (item.id == hour.item_id) {%>
 			<h2><%=item.itemname%></h2>
 			<% }}) %>
@@ -24,6 +73,8 @@
 		</div>
 		<% }) %>
 	</div>
+	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+	<div id="chart_div1" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
 

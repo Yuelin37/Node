@@ -13,7 +13,14 @@ exports.list = function(req, res) {
 		req.models.hour.find({
 			// surname: "Doe"
 		}, function(err, hours) {
-			console.log(items);
+			var hoursInfo = [];
+			// hoursInfo.push([ 'item', 'hours']);
+			for (var i = 0; i < hours.length; i++) {
+				var hourItem =  [parseInt(hours[i].item_id), parseInt(hours[i].num)];
+				// var hourItem = [""+hours[i].loggedFor+"", hours[i].item_id, hours[i].num];
+				hoursInfo.push(hourItem);
+			}
+			console.log(hoursInfo);
 
 			res.render('hours', {
 				title: 'Hours',
