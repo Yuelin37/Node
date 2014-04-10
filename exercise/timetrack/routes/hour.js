@@ -4,6 +4,7 @@
 
 // var orm = require('orm');
 var formidable = require('formidable');
+var format = require('date-format');
 
 exports.list = function(req, res) {
 
@@ -14,18 +15,27 @@ exports.list = function(req, res) {
 			// surname: "Doe"
 		}, function(err, hours) {
 			var hoursInfo = [];
+			var itemsInfo = [];
 			// hoursInfo.push([ 'item', 'hours']);
 			for (var i = 0; i < hours.length; i++) {
-				var hourItem =  [parseInt(hours[i].item_id), parseInt(hours[i].num)];
+				var hourItem =  [parseInt(hours[i].item_id), parseInt(hours[i].num), format.asString('yyyy-MM-dd', hours[i].loggedFor)];
 				// var hourItem = [""+hours[i].loggedFor+"", hours[i].item_id, hours[i].num];
 				hoursInfo.push(hourItem);
 			}
-			console.log(hoursInfo);
+
+			for (var i = 0; i < items.length; i++) {
+				var itemItem =  [parseInt(items[i].id), items[i].itemname];
+				itemsInfo.push(itemItem);
+			}
+			console.log(JSON.stringify(hoursInfo));
+			console.log(JSON.stringify(itemsInfo));
 
 			res.render('hours', {
 				title: 'Hours',
 				hours: hours,
-				items: items
+				items: items,
+				itemsInfo: JSON.stringify(itemsInfo),
+				hoursdata: JSON.stringify(hoursInfo)
 			});
 		});
 	});
