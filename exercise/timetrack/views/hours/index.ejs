@@ -36,6 +36,15 @@
       }
 
       allDates = allDates.sort();
+      var startDate = new Date(allDates[0]);
+      var endDate = new Date(allDates[allDates.length-1]);
+      allDates = [];
+      while (startDate <= endDate) {
+        var tmpDate = new Date(startDate);
+        startDate.setDate(startDate.getDate() + 1);
+        allDates.push(dateToYMD(tmpDate));
+        // console.log(tmpDate);
+      }
       // console.log(allDates);
 
       var finalData = [];
@@ -64,6 +73,12 @@
       }
       console.log(finalSeries);
 
+function dateToYMD(date) {
+    var d = date.getDate();
+    var m = date.getMonth() + 1;
+    var y = date.getFullYear();
+    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+}
       $(function () {
         $('#container').highcharts({
             chart: {
