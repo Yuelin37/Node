@@ -1,0 +1,22 @@
+<!DOCTYPE html/>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1>Hours</h1>
+	<p>User List</p>
+
+	<div id="hours">
+		<% hours.forEach(function(hour) { %>
+		<div class="hours">
+			id:<%=hour.id%>  Hours: <%=hour.num%>  item_id: <%=hour.item_id%>
+
+			
+			<% }) %>
+		</div>
+
+	</div>
+</body>
+</html>

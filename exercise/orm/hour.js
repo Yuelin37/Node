@@ -18,13 +18,13 @@ exports.list = function(req, res) {
 			var itemsInfo = [];
 			// hoursInfo.push([ 'item', 'hours']);
 			for (var i = 0; i < hours.length; i++) {
-				var hourItem = [parseInt(hours[i].item_id), parseInt(hours[i].num), format.asString('yyyy-MM-dd', hours[i].loggedFor)];
+				var hourItem =  [parseInt(hours[i].item_id), parseInt(hours[i].num), format.asString('yyyy-MM-dd', hours[i].loggedFor)];
 				// var hourItem = [""+hours[i].loggedFor+"", hours[i].item_id, hours[i].num];
 				hoursInfo.push(hourItem);
 			}
 
 			for (var i = 0; i < items.length; i++) {
-				var itemItem = [parseInt(items[i].id), items[i].itemname];
+				var itemItem =  [parseInt(items[i].id), items[i].itemname];
 				itemsInfo.push(itemItem);
 			}
 			console.log(JSON.stringify(hoursInfo));
@@ -82,18 +82,4 @@ exports.addPost = function(req, res) {
 		});
 
 	});
-};
-
-exports.updateGet = function(req, res) {
-
-	req.models.hour.find({
-		//
-	}, function(err, hours) {
-
-		res.render('hours/updateHours', {
-			title: 'Update Hours',
-			hours: hours
-		});
-	});
-
 };

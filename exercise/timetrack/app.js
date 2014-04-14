@@ -49,6 +49,7 @@ app.get('/hour', hour.list);
 app.get('/hour/list', hour.list);
 app.get('/hour/add', hour.addGet);
 app.post('/hour/add', hour.addPost);
+app.get('/hour/update', hour.updateGet);
 
 // http.createServer(app).listen(app.get('port'), function(){
 //   console.log('Express server listening on port ' + app.get('port'));

@@ -20,6 +20,8 @@ module.exports = function(cb) {
 
     connection = db;
     db.settings.set('instance.returnAllErrors', true);
+    // Without this setting, orm will not get the new data if I use 'update' to change any data in db.
+    db.settings.set('instance.cache', false);
     setup(db, cb);
   });
 };
