@@ -42,6 +42,43 @@ exports.list = function(req, res) {
 
 };
 
+exports.listws = function(req, res) {
+
+	req.models.item.find({}, function(err, items) {
+
+
+		req.models.hour.find({
+			// surname: "Doe"
+		}, function(err, hours) {
+			var hoursInfo = [];
+			var itemsInfo = [];
+			// hoursInfo.push([ 'item', 'hours']);
+			for (var i = 0; i < hours.length; i++) {
+				var hourItem = [parseInt(hours[i].item_id), parseInt(hours[i].num), format.asString('yyyy-MM-dd', hours[i].loggedFor)];
+				// var hourItem = [""+hours[i].loggedFor+"", hours[i].item_id, hours[i].num];
+				hoursInfo.push(hourItem);
+			}
+
+			for (var i = 0; i < items.length; i++) {
+				var itemItem = [parseInt(items[i].id), items[i].itemname];
+				itemsInfo.push(itemItem);
+			}
+			console.log(JSON.stringify(hoursInfo));
+			console.log(JSON.stringify(itemsInfo));
+
+			var response = {
+				title: 'Hours',
+				hours: hours,
+				items: items,
+				itemsInfo: JSON.stringify(itemsInfo),
+				hoursdata: JSON.stringify(hoursInfo)
+			};
+			res.json(response);
+		});
+	});
+
+};
+
 
 exports.addGet = function(req, res) {
 

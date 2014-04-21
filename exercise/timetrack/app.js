@@ -49,6 +49,7 @@ app.get('/item/ajaxlist', item.ajaxlist);
 app.post('/item/add', item.addPost);
 app.get('/hour', hour.list);
 app.get('/hour/list', hour.list);
+app.get('/hour/listws', hour.listws);
 app.get('/hour/add', hour.addGet);
 app.post('/hour/add', hour.addPost);
 app.get('/hour/update', hour.updateGet);
