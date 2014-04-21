@@ -39,6 +39,8 @@
 				});
 
 				console.log(json.items);
+
+				
 		        
 		    },
 		 
@@ -56,12 +58,15 @@
 		        // alert( "The request is complete!" );
 		    }
 		});
+		$( "#newContent" ).load( "http://localhost:3000/item/ws" );
 	});
 
 	</script>
 </head>
 <body>
 	<h1>Good Morning</h1>
+
+	<div id='newContent'>new...</div>
 
 </body>
 </html>
