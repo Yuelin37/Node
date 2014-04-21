@@ -44,6 +44,8 @@ app.get('/users', user.list);
 app.get('/add', user.add);
 app.post('/add', user.addPost);
 app.get('/item', item.list);
+app.get('/item/ws', item.listws);
+app.get('/item/ajaxlist', item.ajaxlist);
 app.post('/item/add', item.addPost);
 app.get('/hour', hour.list);
 app.get('/hour/list', hour.list);

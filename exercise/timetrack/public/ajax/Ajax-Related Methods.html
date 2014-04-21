@@ -1,0 +1,63 @@
+<html>
+<head>
+	<script src="jquery.js"></script>
+	<script>
+
+	function prtMsg (msg) {
+		console.log(msg);
+	}
+	function prtLine () {
+		console.log("=========================================");
+	}
+	$(document).ready(function() {
+		// Using the core $.ajax() method
+		$.ajax({
+		// the URL for the request
+		url: "post.php",
+		// the data to send (will be converted to a query string)
+		data: {
+			id: 123
+		},
+		// whether this is a POST or GET request
+		type: "GET",
+		// the type of data we expect back
+		dataType : "json",
+		// code to run if the request succeeds;
+		// the response is passed to the function
+		success: function( json ) {
+			$( "<h1/>" ).text( json.title ).appendTo( "body" );
+			$( "<div class=\"content\"/>").html( json.html ).appendTo( "body" );
+		},
+		// code to run if the request fails; the raw request and
+		// status codes are passed to the function
+		error: function( xhr, status, errorThrown ) {
+			alert( "Sorry, there was a problem!" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		},
+		// code to run regardless of success or failure
+		complete: function( xhr, status ) {
+			alert( "The request is complete!" );
+		}
+	});
+	});
+
+	</script>
+</head>
+<body>
+	<div class="room" id="kitchen">
+		<div class="lightbulb on"></div>
+		<div class="switch">k1</div>
+		<div class="switch">k2</div>
+		<div class="clapper">kc</div>
+	</div>
+	<div class="room" id="bedroom">
+		<div class="lightbulb on"></div>
+		<div class="switch">b1</div>
+		<div class="switch">b2</div>
+		<div class="clapper">bc</div>
+	</div>
+	<div id="master_switch">master</div>
+</body>
+</html>

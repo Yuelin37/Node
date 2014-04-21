@@ -9,11 +9,7 @@ exports.list = function(req, res) {
 	req.models.item.find({
 		// surname: "Doe"
 	}, function(err, items) {
-		// SQL: "SELECT * FROM person WHERE surname = 'Doe'"
-
-		// console.log("People found: %d", people.length);
-		// console.log("First person: %s, age %d", people[0].fullName(), people[0].age);
-		// people[0].remove();
+		console.log(items);
 		res.render('items', {
 			title: 'Items',
 			items: items
@@ -21,17 +17,23 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.listws = function(req, res) {
+	req.models.item.find({
+		// surname: "Doe"
+	}, function(err, items) {
+		console.log(items);
+		// res.json({'title': 'items...', 'items': JSON.stringify(items)});
+		res.json({'title': 'items...', 'items': items});
+		res.end();
+	});
+};
+
+exports.ajaxlist = function(req, res) {
+	res.sendfile('./public/ajax/core_ajax.html');
+};
+
 
 exports.add = function(req, res) {
-	// res.setHeader("Content-Type", "text/html");
-	// res.end(
-	// 	'<form action="/add" enctype="multipart/form-data" method="post">' +
-	// 	'<input type="text" name="name"><br>' +
-	// 	'<input type="text" name="surname"><br>' +
-	// 	'<input type="text" name="age"><br>' +
-	// 	'<input type="submit" value="Upload">' +
-	// 	'</form>'
-	// );
 	res.sendfile('./public/additem.html');
 	
 };
