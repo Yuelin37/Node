@@ -68,8 +68,8 @@ exports.listws = function(req, res) {
 
 			var response = {
 				title: 'Hours',
-				hours: hours,
-				items: items,
+				// hours: hours,
+				// items: items,
 				itemsInfo: JSON.stringify(itemsInfo),
 				hoursdata: JSON.stringify(hoursInfo)
 			};

@@ -38,6 +38,11 @@ exports.add = function(req, res) {
 	
 };
 
+exports.ajaxaddddd = function(req, res) {
+	res.sendfile('./public/ajax/ajaxadditem.html');
+	
+};
+
 exports.addPost = function(req, res) {
 	var form = new formidable.IncomingForm();
 	var util = require('util');
@@ -45,7 +50,7 @@ exports.addPost = function(req, res) {
 	form.parse(req, function(err, fields, files) {
 
 		req.models.item.create({
-			name: fields.name
+			itemname: fields.itemname
 		}, function(err, people) {
 			if (err) throw err;
 

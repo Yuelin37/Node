@@ -1,0 +1,65 @@
+body{
+	background: rgb(200, 209, 200);
+}
+
+div#app{
+	width: 600px;
+	margin: 0 auto;
+	background: rgb(172, 197, 207);
+	border-radius: 0px 0px 15px 15px;
+	box-shadow: 1px 1px 50px 1px;
+	margin-top: -8px;
+}
+
+header{
+	text-align: center;
+	font-size: 1.4em;
+	font-family: cursive;
+	padding: 15px;
+}
+
+ul#articles{
+	font-family: monospace;
+	font-size: 1.2em;
+	line-height: 1.4em;
+
+
+}
+
+input#subject{
+	width: 100%;
+	font-size: 1.2em;
+	line-height: 1.2em;
+}
+
+textarea#content{
+	width: 100%;
+	font-size: 1.2em;
+	line-height: 1.2em;
+
+}
+
+button{
+	float: right;
+	font-size: 1.2em;
+
+}
+
+
+div#new_article{
+	width: 85%;
+	margin: 0 auto;
+	display: none; ;
+}
+
+footer{
+	padding-bottom: 40px;
+
+}
+
+footer a{
+	float: right;
+	font-size: 0.8em;
+	color: gray;
+	padding: 10px;
+}
