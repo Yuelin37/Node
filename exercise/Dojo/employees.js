@@ -1,4 +1,5 @@
 var Person = function() {
+// function Person() {
     this.canTalk = true;
     this.greet = function() {
         if (this.canTalk) {
@@ -21,7 +22,7 @@ Employee.prototype = new Person();
 var Customer = function(name) {
     this.name = name;
 };
-Customer.prototype = new Employee();//Person();
+Customer.prototype = new Person();
 
 var Mime = function(name) {
     this.name = name;
