@@ -23,7 +23,10 @@ exports.listws = function(req, res) {
 	}, function(err, items) {
 		console.log(items);
 		// res.json({'title': 'items...', 'items': JSON.stringify(items)});
-		res.json({'title': 'items...', 'items': items});
+		res.json({
+			'title': 'items...',
+			'items': items
+		});
 		res.end();
 	});
 };
@@ -35,12 +38,12 @@ exports.ajaxlist = function(req, res) {
 
 exports.add = function(req, res) {
 	res.sendfile('./public/additem.html');
-	
+
 };
 
-exports.ajaxaddddd = function(req, res) {
+exports.ajaxadd = function(req, res) {
 	res.sendfile('./public/ajax/ajaxadditem.html');
-	
+
 };
 
 exports.addPost = function(req, res) {
@@ -66,4 +69,23 @@ exports.addPost = function(req, res) {
 		});
 
 	});
+};
+
+exports.ajaxaddPost = function(req, res) {
+	// console.log(req.body['postData'][0].value);
+	// res.send({
+	// 	data: 'success!'
+	// });
+
+	req.models.item.create({
+		itemname: req.body['postData'][0].value
+	}, function(err, people) {
+		if (err) throw err;
+
+		res.send({
+			data: 'success!'
+		});
+	});
+
+
 };
