@@ -41,19 +41,20 @@ $(document).ready(function() {
 					$("<div class=\"content\"/>").html(value.id + ': ' + value.num + ' hours spent on item ' + value.item_id + ' on ' + value.loggedFor).appendTo($("#itemList"));
 				});
 
-				console.log(json.itemsInfo);
-				console.log(json.hoursdata);
+				// console.log(json.itemsInfo);
+				// console.log(json.hoursdata);
+				// console.log(json.hours);
 
 
 
-				var items = json.itemsInfo;
+				var items = JSON.parse(json.itemsInfo);
 
 				var myitem = [];
 				var myhour = [];
 				var mydate = [];
-				var hoursdata = json.hoursdata;
+				var hoursdata = JSON.parse(json.hoursdata);
 				for (var o in hoursdata) {
-					console.log(o);
+					// console.log(o);
 
 					var tmpitem = hoursdata[o][0];
 					myitem.push(tmpitem);
@@ -63,7 +64,7 @@ $(document).ready(function() {
 
 					var tmpdate = hoursdata[o][2];
 					mydate.push(tmpdate);
-					console.log(tmpdate);
+					// console.log(tmpdate);
 				}
 
 
@@ -86,6 +87,7 @@ $(document).ready(function() {
 					// console.log(tmpDate);
 				}
 				// console.log(allDates);
+				console.log('items: ' + items);
 
 				var finalData = [];
 				for (var j = 0; j < items.length; j++) {
@@ -95,17 +97,17 @@ $(document).ready(function() {
 					}
 
 					for (var i = 0; i < allDates.length; i++) {
-						for (var o in json.hoursdata ) {
-							if ( json.hoursdata [o][0] == items[j][0]) {
-								if (allDates[i] == json.hoursdata[o][2]) {
-									ex1Hours[i] += json.hoursdata [o][1]
+						for (var o in hoursdata ) {
+							if ( hoursdata [o][0] == items[j][0]) {
+								if (allDates[i] == hoursdata[o][2]) {
+									ex1Hours[i] += hoursdata [o][1]
 								};
 							}
 						}
 					}
 					finalData.push(ex1Hours);
 				}
-				console.log(finalData);
+				console.log('finalData: ' + finalData);
 
 
 				var finalSeries = [];
@@ -116,7 +118,7 @@ $(document).ready(function() {
 					};
 					finalSeries.push(tempSeries);
 				}
-				console.log(finalSeries);
+				console.log('****finalSeries****: '+ finalSeries);
 
 				function dateToYMD(date) {
 					var d = date.getDate();

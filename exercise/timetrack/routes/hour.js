@@ -34,10 +34,10 @@ exports.list = function(req, res) {
 				title: 'Hours',
 				hours: hours,
 				items: items,
-				// itemsInfo: JSON.stringify(itemsInfo),
-				// hoursdata: JSON.stringify(hoursInfo)
-				itemsInfo: itemsInfo,
-				hoursdata: hoursInfo
+				itemsInfo: JSON.stringify(itemsInfo),
+				hoursdata: JSON.stringify(hoursInfo)
+				// itemsInfo: itemsInfo,
+				// hoursdata: hoursInfo
 			});
 		});
 	});
