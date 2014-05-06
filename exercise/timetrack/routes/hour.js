@@ -34,8 +34,10 @@ exports.list = function(req, res) {
 				title: 'Hours',
 				hours: hours,
 				items: items,
-				itemsInfo: JSON.stringify(itemsInfo),
-				hoursdata: JSON.stringify(hoursInfo)
+				// itemsInfo: JSON.stringify(itemsInfo),
+				// hoursdata: JSON.stringify(hoursInfo)
+				itemsInfo: itemsInfo,
+				hoursdata: hoursInfo
 			});
 		});
 	});
@@ -50,6 +52,9 @@ exports.listws = function(req, res) {
 		req.models.hour.find({
 			// surname: "Doe"
 		}, function(err, hours) {
+			console.log("+++++++++++++++++++++++++++++++++++");
+			console.log(hours);
+			console.log("+++++++++++++++++++++++++++++++++++");
 			var hoursInfo = [];
 			var itemsInfo = [];
 			// hoursInfo.push([ 'item', 'hours']);
@@ -68,8 +73,8 @@ exports.listws = function(req, res) {
 
 			var response = {
 				title: 'Hours',
-				// hours: hours,
-				// items: items,
+				hours: hours,
+				items: items,
 				itemsInfo: JSON.stringify(itemsInfo),
 				hoursdata: JSON.stringify(hoursInfo)
 			};

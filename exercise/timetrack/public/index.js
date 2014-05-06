@@ -7,13 +7,15 @@ function prtLine() {
 }
 
 $(document).ready(function() {
+
+
 	refreshItemList();
 
 	function refreshItemList() {
 		// Using the core $.ajax() method
 		$.ajax({
 			// the URL for the request
-			url: "http://localhost:3000/item/ws",
+			url: "http://localhost:3000/hour/listws",
 
 			// the data to send (will be converted to a query string)
 			data: {
@@ -32,14 +34,136 @@ $(document).ready(function() {
 				$("#itemList").empty();
 				$("<h1/>").text(json.title).appendTo($("#itemList"));
 				// $( "<div class=\"content\"/>").html( JSON.stringify(json.items) ).appendTo( "body" );
-				$("<div class=\"content\"/>").html(json.items.length).appendTo($("#itemList"));
+				$("<div class=\"content\"/>").html(json.hours.length).appendTo($("#itemList"));
 
-				$.each(json.items, function(key, value) {
+				$.each(json.hours, function(key, value) {
 					// sum += value;
-					$("<div class=\"content\"/>").html(value.id + ': ' + value.itemname).appendTo($("#itemList"));
+					$("<div class=\"content\"/>").html(value.id + ': ' + value.num + ' hours spent on item ' + value.item_id + ' on ' + value.loggedFor).appendTo($("#itemList"));
 				});
 
-				console.log(json.items);
+				console.log(json.itemsInfo);
+				console.log(json.hoursdata);
+
+
+
+				var items = json.itemsInfo;
+
+				var myitem = [];
+				var myhour = [];
+				var mydate = [];
+				var hoursdata = json.hoursdata;
+				for (var o in hoursdata) {
+					console.log(o);
+
+					var tmpitem = hoursdata[o][0];
+					myitem.push(tmpitem);
+
+					var tmphour = hoursdata[o][1];
+					myhour.push(tmphour);
+
+					var tmpdate = hoursdata[o][2];
+					mydate.push(tmpdate);
+					console.log(tmpdate);
+				}
+
+
+				var allDates = [];
+				for (var i = 0; i < mydate.length; i++) {
+					if (allDates.indexOf(mydate[i]) < 0) {
+						allDates.push(mydate[i]);
+					}
+				}
+
+				allDates = allDates.sort();
+				console.log(allDates);
+				var startDate = new Date(allDates[0]);
+				var endDate = new Date(allDates[allDates.length - 1]);
+				allDates = [];
+				while (startDate <= endDate) {
+					var tmpDate = new Date(startDate);
+					startDate.setDate(startDate.getDate() + 1);
+					allDates.push(dateToYMD(tmpDate));
+					// console.log(tmpDate);
+				}
+				// console.log(allDates);
+
+				var finalData = [];
+				for (var j = 0; j < items.length; j++) {
+					var ex1Hours = [];
+					for (var i = 0; i < allDates.length; i++) {
+						ex1Hours.push(0);
+					}
+
+					for (var i = 0; i < allDates.length; i++) {
+						for (var o in json.hoursdata ) {
+							if ( json.hoursdata [o][0] == items[j][0]) {
+								if (allDates[i] == json.hoursdata[o][2]) {
+									ex1Hours[i] += json.hoursdata [o][1]
+								};
+							}
+						}
+					}
+					finalData.push(ex1Hours);
+				}
+				console.log(finalData);
+
+
+				var finalSeries = [];
+				for (var i = 0; i < finalData.length; i++) {
+					var tempSeries = {
+						name: items[i][1],
+						data: finalData[i]
+					};
+					finalSeries.push(tempSeries);
+				}
+				console.log(finalSeries);
+
+				function dateToYMD(date) {
+					var d = date.getDate();
+					var m = date.getMonth() + 1;
+					var y = date.getFullYear();
+					return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+				}
+				$(function() {
+					$('#container').highcharts({
+						chart: {
+							type: 'column'
+						},
+						title: {
+							text: 'Dailiy Efforts'
+						},
+						subtitle: {
+							text: 'Nothing'
+						},
+						xAxis: {
+							categories: allDates
+						},
+						yAxis: {
+							min: 0,
+							title: {
+								text: 'Efforts (hours)'
+							}
+						},
+						tooltip: {
+							headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+							pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+								'<td style="padding:0"><b>{point.y:.1f} Hours</b></td></tr>',
+							footerFormat: '</table>',
+							shared: true,
+							useHTML: true
+						},
+						plotOptions: {
+							column: {
+								pointPadding: 0.2,
+								borderWidth: 0
+							}
+						},
+						series: finalSeries
+					});
+				});
+
+
+
 			},
 
 			// code to run if the request fails; the raw request and
