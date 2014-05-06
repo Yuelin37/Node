@@ -47,12 +47,15 @@ $(document).ready(function() {
 
 
 
-				var items = JSON.parse(json.itemsInfo);
-
 				var myitem = [];
 				var myhour = [];
 				var mydate = [];
-				var hoursdata = JSON.parse(json.hoursdata);
+
+				// var items = JSON.parse(json.itemsInfo);
+				// var hoursdata = JSON.parse(json.hoursdata);
+				var items = json.itemsInfo;
+				var hoursdata = json.hoursdata;
+
 				for (var o in hoursdata) {
 					// console.log(o);
 
@@ -97,10 +100,10 @@ $(document).ready(function() {
 					}
 
 					for (var i = 0; i < allDates.length; i++) {
-						for (var o in hoursdata ) {
-							if ( hoursdata [o][0] == items[j][0]) {
+						for (var o in hoursdata) {
+							if (hoursdata[o][0] == items[j][0]) {
 								if (allDates[i] == hoursdata[o][2]) {
-									ex1Hours[i] += hoursdata [o][1]
+									ex1Hours[i] += hoursdata[o][1]
 								};
 							}
 						}
@@ -118,7 +121,7 @@ $(document).ready(function() {
 					};
 					finalSeries.push(tempSeries);
 				}
-				console.log('****finalSeries****: '+ finalSeries);
+				console.log('****finalSeries****: ' + finalSeries);
 
 				function dateToYMD(date) {
 					var d = date.getDate();
@@ -138,7 +141,11 @@ $(document).ready(function() {
 							text: 'Nothing'
 						},
 						xAxis: {
-							categories: allDates
+							categories: allDates,
+							labels: {
+								rotation:-45
+
+							}
 						},
 						yAxis: {
 							min: 0,

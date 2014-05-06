@@ -75,8 +75,10 @@ exports.listws = function(req, res) {
 				title: 'Hours',
 				hours: hours,
 				items: items,
-				itemsInfo: JSON.stringify(itemsInfo),
-				hoursdata: JSON.stringify(hoursInfo)
+				// itemsInfo: JSON.stringify(itemsInfo),
+				// hoursdata: JSON.stringify(hoursInfo)
+				itemsInfo: itemsInfo,
+				hoursdata: hoursInfo
 			};
 			res.json(response);
 		});
