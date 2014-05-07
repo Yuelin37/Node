@@ -8,14 +8,19 @@ function prtLine() {
 
 $(document).ready(function() {
 
+	$("#logHourBtn").on("click", ajaxLogHour);
+
+	// Set up the datepicker
 	$('.datepicker').datepicker({
 		autoclose: true,
 		todayHighlight: true,
 		format: 'yyyy-mm-dd'
 	})
 
+	refreshHourChart();
 	refreshItemList();
 
+	// Get the all items info from the /item/ws web service
 	function refreshItemList() {
 		// Using the core $.ajax() method
 		$.ajax({
@@ -47,7 +52,7 @@ $(document).ready(function() {
 				// 	$("<div class=\"content\"/>").html(value.id + ': ' + value.itemname).appendTo($("#itemList"));
 				// });
 
-
+				// Compose the item dropdown list
 				var mySelect = $("#itemDL");
 				$.each(json.items, function(key, value) {
 					mySelect.append(
@@ -75,9 +80,6 @@ $(document).ready(function() {
 
 		});
 	}
-
-
-	$("#logHourBtn").on("click", ajaxLogHour);
 
 
 
@@ -125,7 +127,7 @@ $(document).ready(function() {
 	}
 
 
-	refreshHourChart();
+
 
 	function refreshHourChart() {
 		// Using the core $.ajax() method
