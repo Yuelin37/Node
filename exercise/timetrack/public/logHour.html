@@ -17,6 +17,8 @@
     <!-- Custom styles for this template -->
     <link href="../navbar-fixed-top.css" rel="stylesheet">
 
+    <link href="../stylesheets/datepicker3.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -62,13 +64,13 @@
       <div class="jumbotron">
         <form action="/item/add" enctype="multipart/form-data" method="post" id="myForm">
 
-        <label class="label label-primary">Item: </label>
-        <select name="item" id = "itemDL" class="label label-primary">
+        <label>Item: </label>
+        <select name="item" id = "itemDL">
         </select>
         <label>Hour(s): </label>
         <input type="text" name="numOfHour">
         <label>Date: </label>
-        <input type="text" name="logForDate">
+        <input type="text" name="logForDate"  class="datepicker">
         <input type="button" value="Log" id="logHourBtn" class="btn btn-primary">
 
       </form>
@@ -87,6 +89,15 @@
         </p>
       </div>
 
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+               <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+      </div>
+
+      
     
 
     </div> <!-- /container -->
@@ -101,5 +112,6 @@
     <script src= "../logHour.js"></script>
     <script src="../javascripts/highcharts/highcharts.js"></script>
     <script src="../javascripts/highcharts/modules/exporting.js"></script>
+    <script src="../javascripts/bootstrap-datepicker.js"></script>
   </body>
 </html>

@@ -8,6 +8,10 @@ function prtLine() {
 
 $(document).ready(function() {
 
+	$('.datepicker').datepicker({
+		autoclose: true,
+		format: 'yyyy-mm-dd'
+	})
 
 	refreshItemList();
 
@@ -15,7 +19,7 @@ $(document).ready(function() {
 		// Using the core $.ajax() method
 		$.ajax({
 			// the URL for the request
-			url: "http://localhost:3000/hour/listws",
+			url: "/item/ws",
 
 			// the data to send (will be converted to a query string)
 			data: {
@@ -31,34 +35,124 @@ $(document).ready(function() {
 			// code to run if the request succeeds;
 			// the response is passed to the function
 			success: function(json) {
-				$("#itemList").empty();
-				$("<h1/>").text(json.title).appendTo($("#itemList"));
-				// $( "<div class=\"content\"/>").html( JSON.stringify(json.items) ).appendTo( "body" );
-				$("<div class=\"content\"/>").html(json.hours.length).appendTo($("#itemList"));
 
-				$.each(json.hours, function(key, value) {
-					// sum += value;
-					$("<div class=\"content\"/>").html(value.id + ': ' + value.num + ' hours spent on item ' + value.item_id + ' on ' + value.loggedFor).appendTo($("#itemList"));
+				// $("#itemList").empty();
+				// $("<h1/>").text(json.title).appendTo($("#itemList"));
+				// // $( "<div class=\"content\"/>").html( JSON.stringify(json.items) ).appendTo( "body" );
+				// $("<div class=\"content\"/>").html(json.items.length).appendTo($("#itemList"));
+
+				// $.each(json.items, function(key, value) {
+				// 	// sum += value;
+				// 	$("<div class=\"content\"/>").html(value.id + ': ' + value.itemname).appendTo($("#itemList"));
+				// });
+
+
+				var mySelect = $("#itemDL");
+				$.each(json.items, function(key, value) {
+					mySelect.append(
+						$('<option></option>').val(value.id).html(value.itemname)
+					);
 				});
 
-				// console.log(json.itemsInfo);
-				// console.log(json.hoursdata);
-				// console.log(json.hours);
+
+
+			},
+
+			// code to run if the request fails; the raw request and
+			// status codes are passed to the function
+			error: function(xhr, status, errorThrown) {
+				alert("Sorry, there was a problem!");
+				console.log("Error: " + errorThrown);
+				console.log("Status: " + status);
+				console.dir(xhr);
+			},
+
+			// code to run regardless of success or failure
+			complete: function(xhr, status) {
+				// alert( "The request is complete!" );
+			}
+
+		});
+	}
+
+
+	$("#logHourBtn").on("click", ajaxLogHour);
 
 
 
+	function ajaxLogHour(event) {
+
+		$.ajax({
+			// the URL for the request
+			url: "/hour/ajaxadd",
+
+			// the data to send (will be converted to a query string)
+			data: {
+				// id: 123
+				postData: $("#myForm").serializeArray()
+				// postData: $("#myForm").serialize()
+			},
+
+			// whether this is a POST or GET request
+			type: "POST",
+
+			// the type of data we expect back
+			dataType: "json",
+
+			// code to run if the request succeeds;
+			// the response is passed to the function
+			success: function(json) {
+				refreshHourChart();
+			},
+
+			// code to run if the request fails; the raw request and
+			// status codes are passed to the function
+			error: function(xhr, status, errorThrown) {
+				alert("Sorry, there was a problem!");
+				console.log("Error: " + errorThrown);
+				console.log("Status: " + status);
+				console.dir(xhr);
+			},
+
+			// code to run regardless of success or failure
+			complete: function(xhr, status) {
+				// alert( "The request is complete!" );
+			}
+
+		});
+
+	}
+
+
+	refreshHourChart();
+
+	function refreshHourChart() {
+		// Using the core $.ajax() method
+		$.ajax({
+			// the URL for the request
+			url: "/hour/listws",
+
+			// the data to send (will be converted to a query string)
+			data: {
+				// id: 123
+			},
+
+			// whether this is a POST or GET request
+			type: "GET",
+
+			// the type of data we expect back
+			dataType: "json",
+
+			// code to run if the request succeeds;
+			// the response is passed to the function
+			success: function(json) {
 				var myitem = [];
 				var myhour = [];
 				var mydate = [];
-
-				// var items = JSON.parse(json.itemsInfo);
-				// var hoursdata = JSON.parse(json.hoursdata);
 				var items = json.itemsInfo;
 				var hoursdata = json.hoursdata;
 
 				for (var o in hoursdata) {
-					// console.log(o);
-
 					var tmpitem = hoursdata[o][0];
 					myitem.push(tmpitem);
 
@@ -67,7 +161,6 @@ $(document).ready(function() {
 
 					var tmpdate = hoursdata[o][2];
 					mydate.push(tmpdate);
-					// console.log(tmpdate);
 				}
 
 
@@ -79,7 +172,7 @@ $(document).ready(function() {
 				}
 
 				allDates = allDates.sort();
-				console.log(allDates);
+
 				var startDate = new Date(allDates[0]);
 				var endDate = new Date(allDates[allDates.length - 1]);
 				allDates = [];
@@ -87,10 +180,7 @@ $(document).ready(function() {
 					var tmpDate = new Date(startDate);
 					startDate.setDate(startDate.getDate() + 1);
 					allDates.push(dateToYMD(tmpDate));
-					// console.log(tmpDate);
 				}
-				// console.log(allDates);
-				console.log('items: ' + items);
 
 				var finalData = [];
 				for (var j = 0; j < items.length; j++) {
@@ -110,7 +200,6 @@ $(document).ready(function() {
 					}
 					finalData.push(ex1Hours);
 				}
-				console.log('finalData: ' + finalData);
 
 
 				var finalSeries = [];
@@ -121,7 +210,6 @@ $(document).ready(function() {
 					};
 					finalSeries.push(tempSeries);
 				}
-				console.log('****finalSeries****: ' + finalSeries);
 
 				function dateToYMD(date) {
 					var d = date.getDate();
@@ -143,7 +231,7 @@ $(document).ready(function() {
 						xAxis: {
 							categories: allDates,
 							labels: {
-								rotation:-45
+								rotation: -45
 
 							}
 						},
@@ -192,33 +280,12 @@ $(document).ready(function() {
 		});
 	}
 
-	function test(event) {
-		event.preventDefault();
-		console.log("hello");
-		console.log($("#myForm").serialize());
-	}
-	// Multiple events, same handler
-	// $("input").on("click", test);
 
-	// Switching handlers using the `$.fn.one` method
-	$("p").one("click", test);
-
-	function firstClick() {
-		console.log("You just clicked this for the first time!");
-		// Now set up the new handler for subsequent clicks;
-		// omit this step if no further click responses are needed
-		$(this).click(function() {
-			console.log("You have clicked this before!");
-		});
-	}
-
-
-
-	// Binding a named function
+	// 
 	function ajaxAddItem(event) {
 		$.ajax({
 			// the URL for the request
-			url: "http://localhost:3000/item/ajaxadd",
+			url: "/item/ajaxadd",
 
 			// the data to send (will be converted to a query string)
 			data: {
@@ -236,7 +303,6 @@ $(document).ready(function() {
 			// code to run if the request succeeds;
 			// the response is passed to the function
 			success: function(json) {
-				refreshItemList();
 				console.log("success...");
 			},
 
@@ -251,7 +317,7 @@ $(document).ready(function() {
 
 			// code to run regardless of success or failure
 			complete: function(xhr, status) {
-				// alert( "The request is complete!" );
+				// console.log("...");
 			}
 
 		});

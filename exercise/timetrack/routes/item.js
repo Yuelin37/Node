@@ -21,7 +21,7 @@ exports.listws = function(req, res) {
 	req.models.item.find({
 		// surname: "Doe"
 	}, function(err, items) {
-		console.log(items);
+		// console.log(items);
 		// res.json({'title': 'items...', 'items': JSON.stringify(items)});
 		res.json({
 			'title': 'items...',

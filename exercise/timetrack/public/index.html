@@ -70,21 +70,24 @@
 
     <div class="container">
 
-      <div class="jumbotron" id="container" ></div>
+      <div class="jumbotron" id="container"></div>
 
-
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+        <h2>Log Hours</h2>
+        <form action="/item/add" enctype="multipart/form-data" method="post" id="myForm">
+
+        <label>Item: </label>
+        <select name="item" id = "itemDL">
+        </select>
+        <label>Hour(s): </label>
+        <input type="text" name="numOfHour">
+        <label>Date: </label>
+        <input type="text" name="logForDate"  class="datepicker">
+        <input type="button" value="Log" id="logHourBtn" class="btn btn-primary">
+
+      </form>
       </div>
-
-    <div class="jumbotron" id = 'itemList'>itemlist...</div>
-
+      <!--<div class="jumbotron" id="itemList">abc</div> -->
     </div> <!-- /container -->
 
     
@@ -97,5 +100,6 @@
     <script src= "index.js"></script>
     <script src="./javascripts/highcharts/highcharts.js"></script>
     <script src="./javascripts/highcharts/modules/exporting.js"></script>
+    <script src="./javascripts/bootstrap-datepicker.js"></script>
   </body>
 </html>

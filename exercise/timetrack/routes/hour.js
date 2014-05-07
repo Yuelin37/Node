@@ -52,9 +52,7 @@ exports.listws = function(req, res) {
 		req.models.hour.find({
 			// surname: "Doe"
 		}, function(err, hours) {
-			console.log("+++++++++++++++++++++++++++++++++++");
-			console.log(hours);
-			console.log("+++++++++++++++++++++++++++++++++++");
+
 			var hoursInfo = [];
 			var itemsInfo = [];
 			// hoursInfo.push([ 'item', 'hours']);
@@ -68,8 +66,8 @@ exports.listws = function(req, res) {
 				var itemItem = [parseInt(items[i].id), items[i].itemname];
 				itemsInfo.push(itemItem);
 			}
-			console.log(JSON.stringify(hoursInfo));
-			console.log(JSON.stringify(itemsInfo));
+			// console.log(JSON.stringify(hoursInfo));
+			// console.log(JSON.stringify(itemsInfo));
 
 			var response = {
 				title: 'Hours',
