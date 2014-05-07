@@ -9,6 +9,7 @@ function prtLine() {
 $(document).ready(function() {
 
 	$("#logHourBtn").on("click", ajaxLogHour);
+	$("#fillTestDataBtn").on("click", fillTestData);
 
 	// Set up the datepicker
 	$('.datepicker').datepicker({
@@ -19,6 +20,15 @@ $(document).ready(function() {
 
 	refreshHourChart();
 	refreshItemList();
+
+	function fillTestData(){
+		var i=0;
+		do{
+			ajaxLogHour();
+			i++;
+		}
+		while(i<500);
+	}
 
 	// Get the all items info from the /item/ws web service
 	function refreshItemList() {
