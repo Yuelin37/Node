@@ -12,10 +12,10 @@
     <title>Time is flying...</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="../stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="navbar-fixed-top.css" rel="stylesheet">
+    <link href="../navbar-fixed-top.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -43,21 +43,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="/hour/add">Log Hour</a></li>
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="#about">Log Hour</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
@@ -70,20 +59,35 @@
 
     <div class="container">
 
-      <div class="jumbotron" id="container" ></div>
+      <div class="jumbotron">
+        <form action="/item/add" enctype="multipart/form-data" method="post" id="myForm">
 
+        <label class="label label-primary">Item: </label>
+        <select name="item" id = "itemDL" class="label label-primary">
+        </select>
+        <label>Hour(s): </label>
+        <input type="text" name="numOfHour">
+        <label>Date: </label>
+        <input type="text" name="logForDate">
+        <input type="button" value="Log" id="logHourBtn" class="btn btn-primary">
+
+      </form>
+      </div>
+
+
+
+    <div class="jumbotron" id="itemList" >      </div>
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+               <p>To see the difference between static and fixed top navbars, just scroll.</p>
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
         </p>
       </div>
 
-    <div class="jumbotron" id = 'itemList'>itemlist...</div>
+    
 
     </div> <!-- /container -->
 
@@ -92,10 +96,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./javascripts/jquery.min.js"></script>
-    <script src="./javascripts/bootstrap.js"></script>
-    <script src= "index.js"></script>
-    <script src="./javascripts/highcharts/highcharts.js"></script>
-    <script src="./javascripts/highcharts/modules/exporting.js"></script>
+    <script src="../javascripts/jquery.min.js"></script>
+    <script src="../javascripts/bootstrap.js"></script>
+    <script src= "../logHour.js"></script>
+    <script src="../javascripts/highcharts/highcharts.js"></script>
+    <script src="../javascripts/highcharts/modules/exporting.js"></script>
   </body>
 </html>

@@ -101,6 +101,14 @@ exports.addGet = function(req, res) {
 
 };
 
+exports.logGet = function(req, res) {
+
+	res.sendfile('./public/logHour.html');
+
+};
+
+
+
 exports.addPost = function(req, res) {
 	var form = new formidable.IncomingForm();
 	var util = require('util');
@@ -126,6 +134,23 @@ exports.addPost = function(req, res) {
 		});
 
 	});
+};
+
+exports.ajaxaddPost = function(req, res) {
+	console.log(req.body['postData']);
+	req.models.hour.create({
+		num: req.body['postData'][1].value,
+		loggedFor: req.body['postData'][2].value,
+		item_id: req.body['postData'][0].value
+	}, function(err, people) {
+		if (err) throw err;
+
+		res.send({
+			data: 'success!'
+		});
+
+	});
+
 };
 
 exports.updateGet = function(req, res) {

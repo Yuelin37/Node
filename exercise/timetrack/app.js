@@ -53,8 +53,10 @@ app.post('/item/ajaxadd', item.ajaxaddPost);
 app.get('/hour', hour.list);
 app.get('/hour/list', hour.list);
 app.get('/hour/listws', hour.listws);
-app.get('/hour/add', hour.addGet);
+// app.get('/hour/add', hour.addGet);
+app.get('/hour/add', hour.logGet);
 app.post('/hour/add', hour.addPost);
+app.post('/hour/ajaxadd', hour.ajaxaddPost);
 app.get('/hour/update', hour.updateGet);
 
 // http.createServer(app).listen(app.get('port'), function(){
