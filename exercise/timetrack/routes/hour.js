@@ -135,7 +135,7 @@ exports.addPost = function(req, res) {
 };
 
 exports.ajaxaddPost = function(req, res) {
-	console.log(req.body['postData']);
+	// console.log(req.body['postData']);
 	req.models.hour.create({
 		num: req.body['postData'][1].value,
 		loggedFor: req.body['postData'][2].value,
