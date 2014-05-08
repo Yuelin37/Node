@@ -18,16 +18,22 @@ $(document).ready(function() {
 		format: 'yyyy-mm-dd'
 	})
 
+	$('#dp1').datepicker({
+		format: "yyyy-mm-dd",
+		todayHighlight: true,
+		autoclose: true
+	});
+
 	refreshHourChart();
 	refreshItemList();
 
-	function fillTestData(){
-		var i=0;
-		do{
+	function fillTestData() {
+		var i = 0;
+		do {
 			ajaxLogHour();
 			i++;
 		}
-		while(i<500);
+		while (i < 500);
 	}
 
 	// Get the all items info from the /item/ws web service
@@ -135,7 +141,6 @@ $(document).ready(function() {
 		});
 
 	}
-
 
 
 
