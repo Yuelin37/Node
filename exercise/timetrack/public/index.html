@@ -19,14 +19,19 @@
 
     <!-- Custom styles for this template -->
     <link href="navbar-fixed-top.css" rel="stylesheet">
+
+    <link href="./stylesheets/loading-indicator.css" rel="stylesheet">
+
+    <link href="./stylesheets/font-awesome.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+                            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                            <![endif]-->
 </head>
 
 <body>
@@ -82,7 +87,10 @@
         </div>
     </div>
 
+        <!-- <i class="fa fa-spinner fa-spin" id="loading-indicator" style="display:none"></i> -->
     <div class="container">
+
+
 
         <div class="jumbotron" id="container"></div>
 
@@ -119,9 +127,9 @@
                     <div class="btn-group">
                         <input type="button" value="Log" id="logHourBtn" class="btn btn-default">
                     </div>
-<!--                     <div class="btn-group">
-                        <input type="button" value="Fill Data" id="fillTestDataBtn" class="btn btn-primary">
-                    </div> -->
+                                        <div class="btn-group">
+                            <input type="button" value="Fill Data" id="fillTestDataBtn" class="btn btn-primary">
+                            </div>
                 </div>
                 <!-- <button class="btn btn-default btn-block" type="submit">Update</button> -->
             </form>
@@ -134,7 +142,7 @@
 
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+                            ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./javascripts/jquery.min.js"></script>
     <script src="./javascripts/bootstrap.js"></script>

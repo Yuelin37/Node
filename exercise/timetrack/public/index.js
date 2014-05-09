@@ -6,8 +6,21 @@ function prtLine() {
 	console.log("=========================================");
 }
 
+
+
 $(document).ready(function() {
 
+	// Trying to use the following code to show/hide the loading indicator. Failed. Need more investigation.
+/*	$(document).ajaxStart(function(event, request, settings) {
+		$('#loading-indicator').show();
+		console.log("show: " + event);
+	});
+
+	$(document).ajaxComplete(function(event, request, settings) {
+		$('#loading-indicator').hide();
+		console.log("hide");
+	});
+	*/
 	$("#logHourBtn").on("click", ajaxLogHour);
 	$("#fillTestDataBtn").on("click", fillTestData);
 
@@ -16,7 +29,7 @@ $(document).ready(function() {
 		autoclose: true,
 		todayHighlight: true,
 		format: 'yyyy-mm-dd'
-	})
+	});
 
 	$('#dp1').datepicker({
 		format: "yyyy-mm-dd",
@@ -64,8 +77,8 @@ $(document).ready(function() {
 				// $("<div class=\"content\"/>").html(json.items.length).appendTo($("#itemList"));
 
 				// $.each(json.items, function(key, value) {
-				// 	// sum += value;
-				// 	$("<div class=\"content\"/>").html(value.id + ': ' + value.itemname).appendTo($("#itemList"));
+				// sum += value;
+				// $("<div class=\"content\"/>").html(value.id + ': ' + value.itemname).appendTo($("#itemList"));
 				// });
 
 				// Compose the item dropdown list
@@ -83,7 +96,7 @@ $(document).ready(function() {
 			// code to run if the request fails; the raw request and
 			// status codes are passed to the function
 			error: function(xhr, status, errorThrown) {
-				alert("Sorry, there was a problem!");
+				// alert("Sorry, there was a problem!");
 				console.log("Error: " + errorThrown);
 				console.log("Status: " + status);
 				console.dir(xhr);
@@ -127,7 +140,7 @@ $(document).ready(function() {
 			// code to run if the request fails; the raw request and
 			// status codes are passed to the function
 			error: function(xhr, status, errorThrown) {
-				alert("Sorry, there was a problem!");
+				// alert("Sorry, there was a problem!");
 				console.log("Error: " + errorThrown);
 				console.log("Status: " + status);
 				console.dir(xhr);
@@ -211,8 +224,8 @@ $(document).ready(function() {
 						for (var o in hoursdata) {
 							if (hoursdata[o][0] == items[j][0]) {
 								if (allDates[i] == hoursdata[o][2]) {
-									ex1Hours[i] += hoursdata[o][1]
-								};
+									ex1Hours[i] += hoursdata[o][1];
+								}
 							}
 						}
 					}

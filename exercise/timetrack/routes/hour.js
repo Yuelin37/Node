@@ -78,11 +78,24 @@ exports.listws = function(req, res) {
 				itemsInfo: itemsInfo,
 				hoursdata: hoursInfo
 			};
+/*			sleep(5000, function() {
+				res.json(response);
+
+			});*/
+
 			res.json(response);
 		});
 	});
 
 };
+
+function sleep(time, callback) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    callback();
+}
 
 
 exports.addGet = function(req, res) {
