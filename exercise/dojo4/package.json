@@ -1,0 +1,26 @@
+{
+  "name": "dojo4",
+  "version": "0.0.1",
+  "description": "js demo",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "body": "^4.4.2",
+    "express": "*",
+    "mongoose": "^3.8.9"
+  },
+  "keywords": [
+    "cmd",
+    "amd",
+    "skd",
+    "mvc",
+    "ajile"
+  ],
+  "author": "ylyan",
+  "license": "MIT",
+  "devDependencies": {
+    "body": "^4.4.2"
+  }
+}

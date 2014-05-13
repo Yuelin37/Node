@@ -10,8 +10,15 @@ function prtLine() {
 
 $(document).ready(function() {
 
+	// Setting up a loading indicator using Ajax Events
+	$("#loading-indicator").ajaxStart(function() {
+		$(this).show();
+	}).ajaxStop(function() {
+		$(this).hide();
+	});
+
 	// Trying to use the following code to show/hide the loading indicator. Failed. Need more investigation.
-/*	$(document).ajaxStart(function(event, request, settings) {
+	/*	$(document).ajaxStart(function(event, request, settings) {
 		$('#loading-indicator').show();
 		console.log("show: " + event);
 	});
