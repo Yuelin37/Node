@@ -1,65 +1,63 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>TodoMVC</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <section id="todoapp">
-      <header id="header">
-        <h1>Todos</h1>
-        <input type="text" id="new-todo" placeholder="What needs to be done?" />
-      </header>
+        <header id="header">
+            <h1>Todos</h1>
+            <input type="text" id="new-todo" placeholder="What needs to be done?" />
+        </header>
 
         <section id="main">
-          <ul id="todo-list">
-            <li class="completed">
-              <input type="checkbox" class="toggle">
-              <label>Todo_1</label><button class="destroy"></button>
-            </li>
-            <li>
-              <input type="checkbox" class="toggle">
-              <label>Todo_2</label><button class="destroy"></button>
-            </li>
-            <li>
-              <input type="checkbox" class="toggle">
-              <label>Todo_3</label><button class="destroy"></button>
-            </li>
-          </ul>
+            <ul id="todo-list">
+               
+            </ul>
 
-          <input type="checkbox" id="toggle-all">
+            <input type="checkbox" id="toggle-all">
         </section>
 
         <footer id="footer">
-          <span id="todo-count">
-            <strong>2</strong> todos left
-          </span>
-          <ul id="filters">
-            <li>
-              <a href="all" class="selected">All</a>
-            </li>
-            <li>
-              <a href="active">Active</a>
-            </li>
-            <li>
-              <a href="completed">Completed</a>
-            </li>
-          </ul>
+            <span id="todo-count">
+                <strong>2</strong>todos left
+            </span>
+            <ul id="filters">
+                <li>
+                    <a href="all" class="selected">All</a>
+                </li>
+                <li>
+                    <a href="active">Active</a>
+                </li>
+                <li>
+                    <a href="completed">Completed</a>
+                </li>
+            </ul>
 
-          <button id="clear-completed">
-            Clear completed (1)
-          </button>
+            <button id="clear-completed">
+                Clear completed (1)
+            </button>
         </footer>
     </section>
 
     <footer id="info">
-      <p>Double-click to edit a todo</p>
+        <p>Double-click to edit a todo</p>
     </footer>
+
+    <script type="text/x-handlebars-template" id="todo-tmpl">
+        <input type = "checkbox" class = "toggle">
+        <label> {{title}} </label><button class="destroy"></button >
+    </script>
 
     <script type="text/javascript" src='js/libs/jquery.js'></script>
     <script type="text/javascript" src='js/libs/underscore.js'></script>
     <script type="text/javascript" src='js/libs/backbone.js'></script>
+    <script type="text/javascript" src='js/libs/handlebars.js'></script>
     <script type="text/javascript" src='js/todos.js'></script>
-  </body>
+</body>
+
 </html>

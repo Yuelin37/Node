@@ -19,6 +19,7 @@ app.get('/todos', function(req, res) {
 app.post('/todos', function(req, res) {
 	jsonBody(req, res, function(err, body) {
 		var todo = new Todo(body);
+
 		todo.save(function() {
 			console.log(body);
 			res.send(body);
