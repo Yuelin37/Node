@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app = "todosApp">
   <head>
     <meta charset="utf-8">
     <title>TodoMVC</title>
@@ -9,17 +9,11 @@
     <section id="todoapp" ng-controller='TodosController'>
       <header id="header">
         <h1>Todos</h1>
-        <input type="text" id="new-todo" placeholder="What needs to be done?" ng-model='title'/>
+        <input type="text" id="new-todo" placeholder="What needs to be done?" ng-model='title' keypress='add_todo'/>
       </header>
 
         <section id="main">
-          <ul id="todo-list" ng-repeat = 'todo in todos'>
-            <li class="completed">
-              <input type="checkbox" class="toggle">
-              <label ng-bind='todo.title'></label><button class="destroy"></button>
-            </li>
-            
-          </ul>
+          <div ng-view></div>
 
           <input type="checkbox" id="toggle-all">
         </section>
